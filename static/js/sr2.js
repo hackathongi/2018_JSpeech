@@ -1,5 +1,5 @@
 const LANG = 'es-ES';
-const CLAVE_PATT = /.*girona.*/i;
+const CLAVE_PATT = /.*repite.*/i;
 const TIMING_DELAY = 5000;
 
 $(function () {
@@ -83,13 +83,22 @@ $(function () {
         }
     }
 
+    //var synthesis = speechSynthesis;
+
     /**
      * Enviar la orden AJAX a la API
      * @param text
      */
     function sendOrder(text) {
         console.log('Send order');
-        var order = text.toLowerCase().split('girona').pop();
+        var order = text.toLowerCase().split('repite').pop();
         console.log(order);
+    }
+
+    function speach(text) {
+        var utterance = new SpeechSynthesisUtterance();
+        utterance.lang = 'es-ES';
+        utterance.text = text;
+        speechSynthesis.speak(utterance);
     }
 });
