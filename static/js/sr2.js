@@ -93,6 +93,8 @@ $(function () {
         console.log('Send order');
         var order = text.toLowerCase().split('repite').pop();
         console.log(order);
+        var url ="";
+        $.post( url, text );
     }
 
     function speach(text) {
