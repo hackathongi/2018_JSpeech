@@ -1,5 +1,5 @@
 const LANG = 'ca-ES';
-const CLAVE_PATT = /.*alfonso.*/i;
+const CLAVE_PATT = /.*girona.*/i;
 const TIMING_DELAY = 5000;
 
 $(function () {
@@ -64,6 +64,7 @@ $(function () {
         if (!hasKey) {
             var patt = new RegExp(CLAVE_PATT);
             hasKey = patt.test(message.toLowerCase());
+            $('#text').text(message);
 
             if (hasKey) {
                 console.log('---¡KEY!---');
@@ -92,7 +93,7 @@ $(function () {
     function sendOrder(text) {
         console.log('Send order');
 
-        var text = text.toLowerCase().split('alfonso').pop();
+        text = text.toLowerCase().split('girona').pop();
         var url = 'http://192.192.193.155:5000/voice/' + text;
         $.ajax({
             url: url,
