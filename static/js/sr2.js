@@ -1,10 +1,10 @@
-const LANG = 'es-ES';
-const CLAVE_PATT = /.*repite.*/i;
+const LANG = 'ca-ES';
+const CLAVE_PATT = /.*alfonso.*/i;
 const TIMING_DELAY = 5000;
 
 $(function () {
     if (!('webkitSpeechRecognition' in window)) {
-        upgrade();
+        alert('Navegador Incompatible! Usa Chrome');
     } else {
         var recognition = new webkitSpeechRecognition();
         var hasKey = false;
@@ -91,14 +91,31 @@ $(function () {
      */
     function sendOrder(text) {
         console.log('Send order');
-        var order = text.toLowerCase().split('repite').pop();
-        console.log(order);
-        var url ="";
-        $.post( url, text );
+
+        var text = text.toLowerCase().split('alfonso').pop();
+        var url = 'http://192.192.193.155:5000/voice/' + text;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            headers: {"X-My-Custom-Header": "*"},
+            crossDomain: true,
+            success: function (response) {
+                console.log(response);
+                if (response != null && response.message != null) {
+                    speach(response.message);
+                } else {
+                    speach('No he entès ' + text);
+                }
+            },
+            error: function () {
+                speach('No he entès ' + text);
+            }
+        });
     }
 
     function speach(text) {
-        var utterance = new SpeechSynthesisUtterance();
+        var utterance = null;
+        utterance = new SpeechSynthesisUtterance();
         utterance.lang = 'es-ES';
         utterance.text = text;
         speechSynthesis.speak(utterance);
