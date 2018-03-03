@@ -1,59 +1,60 @@
-<!doctype html>
+<!DOCTYPE HTML>
+<!--
+	Caminar by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Speech Recognition</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="static/css/main.css" />
+	</head>
+	<body>
 
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Hackathon Girona 2018 - JSpeech</title>
-    <meta name="description" content="Hackathon Girona 2018">
-    <meta name="author" content="@hackathongi">
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
+		<!-- Header -->
+			<header id="header">
+				<div class="logo"><a href="#">Casa domótica</a></div>
+			</header>
 
-<body>
+		<!-- Main -->
+			<section id="main">
+				<div class="inner">
+				<!-- One -->
+					<section id="one" class="wrapper style1">
+						<div class="image fit flush">
+							<img src="static/images/pic02.jpg" alt="" />
+						</div>
+						<header class="special">
+							<h2>Di la orden</h2>
+							<p><b>Oye tus peticiones y las transmite.<b/></p>
+						</header>
+						<div class="content">
+							<img src="static/images/micro.png" class="micro-imagen">
+						</div>
+					</section>
+				</div>
+			</section>
 
-<div id="info">
-    <p id="info_start">Click on the microphone icon and begin speaking.</p>
-    <p id="info_speak_now">Speak now.</p>
-    <p id="info_no_speech">No speech was detected. You may need to adjust your
-        <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
-            microphone settings</a>.</p>
-    <p id="info_no_microphone" style="display:none">
-        No microphone was found. Ensure that a microphone is installed and that
-        <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
-            microphone settings</a> are configured correctly.</p>
-    <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
-    <p id="info_denied">Permission to use microphone was denied.</p>
-    <p id="info_blocked">Permission to use microphone is blocked. To change,
-        go to chrome://settings/contentExceptions#media-stream</p>
-    <p id="info_upgrade">Web Speech API is not supported by this browser.
-        Upgrade to <a href="//www.google.com/chrome">Chrome</a>
-        version 25 or later.</p>
-</div>
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="container">
+					<ul class="icons">
+						<li><a href="https://twitter.com/hashtag/hackathongi" target="_blank" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+					</ul>
+				</div>
+			</footer>
 
-<div class="right">
-    <button id="start_button">
-        <img id="start_img" src="/static/img/mic.gif" alt="Start">
-    </button>
-</div>
-<div id="results">
-    <span id="final_span" class="final"></span>
-    <span id="interim_span" class="interim"></span>
-    <p>
-</div>
-<div class="center">
-    <p>
-    <div id="div_language">
-        <select id="select_language" onchange="updateCountry()">
-            <option value="es-ES" selected>Español</option>
-        </select>
-        &nbsp;&nbsp;
-        <select id="select_dialect">
-            <option value="es-ES">España</option>
-        </select>
-    </div>
-</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="/static/js/sr2.js"></script>
-</body>
+		<!-- Scripts -->
+			<script src="static/js/jquery.min.js"></script>
+			<script src="static/js/jquery.poptrox.min.js"></script>
+			<script src="static/js/skel.min.js"></script>
+			<script src="static/js/util.js"></script>
+			<script src="static/js/main.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			<script src="/static/js/sr2.js"></script>
+	</body>
 </html>
