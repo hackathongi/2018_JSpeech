@@ -1,4 +1,8 @@
 $(function () {
+
+    var PALABRA_CLAVE = 'girona';
+
+
     showInfo('info_start');
 
     var create_email = false;
@@ -11,20 +15,43 @@ $(function () {
         upgrade();
     } else {
         var recognition = new webkitSpeechRecognition();
-        recognition.continuous = true;
-        recognition.interimResults = true;
+        recognition.start();
+
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        final_transcript = '';
+        recognition.lang = select_dialect.value;
+        ignore_onend = false;
+        final_span.innerHTML = '';
+        interim_span.innerHTML = '';
+        start_img.src = '/static/img/mic-slash.gif';
+        showInfo('info_allow');
+        showButtons('none');
+        //start_timestamp = event.timeStamp;
+
+        recognition.onspeechstart = function () {
+            console.log('Speech has been detected');
+        };
+
+        recognition.onspeechend = function () {
+            console.log('Speech has stopped being detected');
+        };
 
         recognition.onstart = function () {
+            console.log('start');
             recognizing = true;
             showInfo('info_speak_now');
             start_img.src = '/static/img/mic-animate.gif';
         };
 
         recognition.onerror = function (event) {
+            console.log('ERROR', event);
+
             if (event.error == 'no-speech') {
                 start_img.src = '/static/img/mic.gif';
                 showInfo('info_no_speech');
-                ignore_onend = true;
+                recognition.start();
             }
             if (event.error == 'audio-capture') {
                 start_img.src = '/static/img/mic.gif';
@@ -42,28 +69,36 @@ $(function () {
         };
 
         recognition.onend = function () {
-            // TODO: Enviar señar de texto
             console.log('onend');
-            recognizing = false;
+            recognition.start();
+
             if (ignore_onend) {
+                console.log('ignorado');
                 return;
             }
             start_img.src = '/static/img/mic.gif';
             if (!final_transcript) {
                 showInfo('info_start');
-                return;
+                //return;
             }
             showInfo('');
-            if (window.getSelection) {
-                window.getSelection().removeAllRanges();
-                var range = document.createRange();
-                range.selectNode(document.getElementById('final_span'));
-                window.getSelection().addRange(range);
-            }
+            // if (window.getSelection) {
+            //     window.getSelection().removeAllRanges();
+            //     var range = document.createRange();
+            //     range.selectNode(document.getElementById('final_span'));
+            //     window.getSelection().addRange(range);
+            // }
+
+            // Start again
         };
 
         recognition.onresult = function (event) {
             console.log('onresult');
+
+            var resultados = event.results;
+
+
+
             var interim_transcript = '';
             for (var i = event.resultIndex; i < event.results.length; ++i) {
                 if (event.results[i].isFinal) {
@@ -78,6 +113,9 @@ $(function () {
             if (final_transcript || interim_transcript) {
                 showButtons('inline-block');
             }
+
+            console.log(recognition);
+            //recognition.start();
         };
     }
 
@@ -101,26 +139,26 @@ $(function () {
         });
     }
 
-    /**
-     * Eventos Boton
-     * @param event
-     */
-    $('#start_button')
-        .mousedown(function () {
-            final_transcript = '';
-            recognition.lang = select_dialect.value;
-            recognition.start();
-            ignore_onend = false;
-            final_span.innerHTML = '';
-            interim_span.innerHTML = '';
-            start_img.src = '/static/img/mic-slash.gif';
-            showInfo('info_allow');
-            showButtons('none');
-            start_timestamp = event.timeStamp;
-        })
-        .mouseup(function () {
-            recognition.stop();
-        });
+    // /**
+    //  * Eventos Boton
+    //  * @param event
+    //  */
+    // $('#start_button')
+    //     .mousedown(function () {
+    //         final_transcript = '';
+    //         recognition.lang = select_dialect.value;
+    //         recognition.start();
+    //         ignore_onend = false;
+    //         final_span.innerHTML = '';
+    //         interim_span.innerHTML = '';
+    //         start_img.src = '/static/img/mic-slash.gif';
+    //         showInfo('info_allow');
+    //         showButtons('none');
+    //         start_timestamp = event.timeStamp;
+    //     })
+    //     .mouseup(function () {
+    //         recognition.stop();
+    //     });
 
     function showInfo(s) {
         if (s) {
